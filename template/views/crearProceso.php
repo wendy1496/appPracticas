@@ -10,7 +10,7 @@ include_once '../../controlador/conexion.php';
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarNav">
     <div>
-      <a class="btn" href="creacionCentro.php"><i class="fas fa-undo-alt"></i> VOLVER</a>
+      <a class="btn" href="registroContrato.php"><i class="fas fa-undo-alt"></i> VOLVER</a>
     </div>
   </div>
   <div>
@@ -120,7 +120,7 @@ include_once '../../controlador/conexion.php';
               $consulta->execute();  
               if ($fila=$consulta->fetch(PDO::FETCH_ASSOC)){
                 $facultad = $fila['facultad'];
-                $sql="SELECT * FROM tblcentroPracticas WHERE facultad = '".$facultad."'";  
+                $sql="SELECT a.nit, a.correo, a.paginaWeb, a.telefono, a.direccion, a.ciudad, a.nombre, b.modalidad FROM tblcentropracticas a INNER JOIN tblcentrofacultad b ON a.nit = b.nit";  
             $consulta=$con->prepare($sql);
             $consulta->execute();  
             while ($fila2=$consulta->fetch(PDO::FETCH_ASSOC)){
@@ -220,7 +220,7 @@ include_once '../../controlador/conexion.php';
           <div class="row pt-2 pb-2">
           <div class="col-xl-12 col-sm-6">
                   <label for="formGroupExampleInput" class="form-label required text-dark">Funciones</label>
-                  <input class="form-control text-secondary" type="file" accept=".pdf" name="anexo" required>
+                  <textarea class="form-control" id="objeto"  name="funciones" rows="4"></textarea> 
                 </div>
           </div>
           <h5 class="text-center pt-4 pb-2">PRODUCTO FINAL O ACTIVIDADES QUE DEBE ENTREGAR AL FINALIZAR LA PRACTICA (en caso que aplique)</h5>

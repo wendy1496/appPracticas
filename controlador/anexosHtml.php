@@ -37,7 +37,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$_SESSION['username'].'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
+                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$nit.'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -69,7 +69,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$_SESSION['username'].'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
+                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$nit.'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -103,7 +103,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$_SESSION['username'].'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
+                  <iframe src="<?php ECHO '../../controlador/anexos/'.$texto.$nit.'.pdf' ?>" style="width:100%; height:600px;" frameborder="0"></iframe>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -116,7 +116,7 @@
             <div class="row pt-2 pb-2">
 
             <?php 
-    $sql5="SELECT * FROM tblObservaciones WHERE nombre = '$nombre' and usuario ='$_SESSION[username]'";  
+    $sql5="SELECT * FROM tblObservaciones WHERE nombre = '$nombre' and usuario ='$nit'";  
         $consulta5=$con->prepare($sql5);
         $consulta5->execute();  
         if ($fila5=$consulta5->fetch(PDO::FETCH_ASSOC)){

@@ -2,7 +2,7 @@
   include_once "header.php"
 ?>
 <?php  
-  include_once "header2.php"
+  include_once "header3.php"
 ?>
 <?php
 include_once '../../controlador/conexion.php';
@@ -39,12 +39,12 @@ include_once '../../controlador/conexion.php';
               <label for="formGroupExampleInput" class="form-label required text-dark">Nombre de la empresa o razón social</label>
               <input class="form-control text-secondary" type="" name="nombreEmpresa" placeholder="Nombre Centro de prácticas" value="" required>
             </div>
-            <div class="col-xl-4 col-sm-6">
+            <div class="col-xl-5 col-sm-6">
               <label for="formGroupExampleInput" class="form-label required text-dark">NIT</label>
               <input class="form-control text-secondary" type="" name="nit" placeholder="NIT Centro de prácticas" value="" required>
             </div>
-            <div class="col-xl-2 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Código de verificación</label>
+            <div class="col-xl-1 col-sm-6">
+              <label for="formGroupExampleInput" class="form-label required text-dark">CV</label>
               <input class="form-control text-secondary" type="number" name="digito" value="" required>
             </div>
           </div>
@@ -101,9 +101,11 @@ include_once '../../controlador/conexion.php';
                 <button class="btn btn-tdea">Crear</button>
             </div>
           </div>
+          </form>  
+      <form action="../../controlador/centroPracticasFacultad.php" id="f1" name="f1" method="post"  enctype="multipart/form-data" class="img-form">
           <h5 class="text-center pt-3 pb-3">Asociar centro de prácticas con facultad o programa</h5>
         <center><p>Los campos marcados con * son obligatorios</p></center>
-        <form id="f1" name="f1">
+
               <div class="row pt-2 pb-2">
                 <div class="col-xl-6 col-sm-6">
                   <label for="formGroupExampleInput" class="form-label required text-dark">Facultad o programa</label>
@@ -128,7 +130,7 @@ include_once '../../controlador/conexion.php';
                
               </div>
               </div>
-            </form>
+            
               <script>
                
                 function cambiarDatos(){
@@ -154,18 +156,21 @@ include_once '../../controlador/conexion.php';
                 }
 
               </script>
-      </form>  
-      <form action="../../controlador/centroPracticasFacultad.php" method="post"  enctype="multipart/form-data" class="img-form">
-          <div class="row pt-4 pb-4">
-            <div class="col-xl-6 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Descripción de la práctica</label>
-              <input class="form-control text-secondary" type="number" name="descripcion" placeholder="Descripción" value="" >
-            </div>
-            <div class="col-xl-6 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Capacidad de cupos</label>
-              <input class="form-control text-secondary" type="number" name="cuposAsignados" placeholder="Capacidad de cupos" value="" >
-            </div>
-          </div>
+      
+      <?php
+            
+            if($con){      
+              $sql="SELECT * FROM tblcentroPracticas";  
+              $consulta=$con->prepare($sql);
+              $consulta->execute();  
+              if ($fila=$consulta->fetch(PDO::FETCH_ASSOC)){                          
+              ?>
+              <input class="form-control text-secondary" type="number" name="nit"   value="<?php echo $fila['nit'] ?>" hidden>
+              <?php
+                }  
+            }
+          ?>
+     
           <div class="row pt-2 text-center">
             <div class="col-6">
                 <button class="btn btn-tdea">Agregar</button>

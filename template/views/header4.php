@@ -19,30 +19,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
       <li class="nav-item">
-          <a class="nav-link active" href="index.php">Crear usuarios</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Creación contratos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="subirArchivo.php">Subir archivo</a></li>
-            <li><a class="dropdown-item" href="contratos.php">Contratos</a></li>
-            <li><a class="dropdown-item" href="componentes.php">Componentes</a></li>
-            <li><a class="dropdown-item" href="contratista.php">Contratistas</a></li>
-          </ul>
+          <a class="nav-link active" href="listaRevisionFacultad.php">Centro de prácticas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="listaRevision.php">Lista de chequeo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="listadoCDP.php">Solicitud CDP</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="registrarRol.php">Crear roles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="listaContratos.php">Lista de contratos</a>
+          <a class="nav-link active" href="registroContrato.php">Proceso de prácticas</a>
         </li>
       </ul>
     </div>

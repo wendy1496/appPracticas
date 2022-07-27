@@ -22,7 +22,16 @@ include_once 'conexion.php';
                       }
                       else if($fila['rol']=="Estudiante"){
                         header("Location: ../template/views/estudiante.php");
+                      }else if($fila['rol']=="Asesor escenario de prácticas"){
+                        header("Location: ../template/views/creacionCentro.php");
+                      }else if($fila['rol']=="Coordinador de facultad"){
+                        header("Location: ../template/views/listaRevisionFacultad.php");
+                      }else if($fila['rol']=="Coordinador de programa"){
+                        header("Location: ../template/views/listaRevisionFacultad.php");
+                      }else if($fila['rol']=="Decano"){
+                        header("Location: ../template/views/estudiante.php");
                       }
+
                       else header("Location: ../template/views/respuesta.php" );
                       
                     }                     

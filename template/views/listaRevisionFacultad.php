@@ -2,7 +2,7 @@
   include_once "header.php"
 ?>
 <?php  
-  include_once "header2.php"
+  include_once "header4.php"
 ?>
 <?php
 include_once '../../controlador/conexion.php';
@@ -19,7 +19,15 @@ include_once '../../controlador/conexion.php';
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
       <script src="../../public/js/main.js"></script>
-
+      <?php
+            $usuario = $_SESSION['username'];
+            if($con){      
+              $sql="SELECT * FROM `tblusuarios` WHERE `usuario` = '$usuario' ";  
+              $consulta=$con->prepare($sql);
+              $consulta->execute();  
+              if ($fila3=$consulta->fetch(PDO::FETCH_ASSOC)){ 
+                $facultad = $fila3['facultad'];                   
+              ?>
         <form action="" method="post">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -34,7 +42,7 @@ include_once '../../controlador/conexion.php';
               <?php
             
           if($con){      
-            $sql="SELECT a.nit, a.nombre, b.modalidad FROM tblcentropracticas a INNER JOIN tblcentrofacultad b ON a.nit = b.nit ";  
+            $sql="SELECT a.nit, a.nombre, b.modalidad FROM tblcentropracticas a INNER JOIN tblcentrofacultad b ON a.nit = b.nit WHERE b.modalidad = '$facultad'";  
             $consulta=$con->prepare($sql);
             $consulta->execute();  
             while ($fila=$consulta->fetch(PDO::FETCH_ASSOC)){                          
@@ -49,6 +57,10 @@ include_once '../../controlador/conexion.php';
                 }  
             }
           ?>
+          <?php
+              }
+            }
+            ?>
             </tbody>
             <tfoot>
                 <tr>
