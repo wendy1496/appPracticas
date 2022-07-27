@@ -1,0 +1,272 @@
+create database bd_contratacion;
+use bd_contratacion;
+create table tblcontratos(
+	numContrato varchar(50) primary key, 
+	nombreContrato varchar(50),
+	periodo varchar(50),
+	planAccion varchar(100),
+	entidadConvenio varchar(50),
+	centroCostos varchar(50),
+	objeto text,
+	fechaInicio Date,
+	fechaFinal  Date,
+	valor int,
+	supervisor varchar(50),
+	identificacion varchar(10),
+	rol varchar(10),
+	estado varchar(10),
+);
+
+create table tblcomponentes(
+componente_id int primary key auto_increment,
+dependencia varchar(30),
+subcomponente varchar(100),
+rolDep varchar(30),
+perfil text,
+objetoContratar text,
+honorarios int,
+cantidadPersonas int,
+tiempoDias int,
+valorDia int,
+valorTotalPresup int,
+valorTotalContra int,
+desplazamiento varchar(2),
+fechaApertura Date,
+fechaCierre Date,
+horaCierre Time,
+fechaPublicacion Date,
+medioPublicacion varchar(50),
+adiciones text,
+presupuesto int,
+numContrato varchar(50),
+foreign key(numContrato) references tblContratos(numContrato)
+);
+
+create table tblContratista(
+cedulaContratista varchar(12) primary key, 
+contratista varchar(50),
+telefono varchar(50),
+correo varchar(50),
+obligaciones text,
+rol varchar(50),
+componente_id int,
+foreign key(componente_id) references tblComponentes(componente_id)
+);
+
+create table tblUsuarios(
+cedula varchar(12) primary key, 
+nombre varchar(50),
+fechaNacimiento Date,
+correo varchar(50),
+telefono varchar(50),
+fijo varchar(50),
+direccion varchar(100),
+ciudad varchar(50),
+rol varchar(50),
+usuario varchar(50),
+contrasena varchar(50)
+);
+
+create table tblInfoContratos(
+infoContratos_id int primary key not null auto_increment,
+honorarios int,
+nombreContrato varchar(50),
+cantidadPersonas int,
+perfil text,
+objetoContratar text,
+fechaApertura Date,
+medioPublicacion varchar(50),
+fechaCierre Date,
+horaCierre Time,
+fechaPublicacion Date,
+correo varchar(50),
+estado varchar (10),
+cedula varchar(12)
+);
+
+create table tblTitulos(
+titulos_id int primary key auto_increment,
+nombreTitulo varchar(50),
+institucion varchar(100),
+anexo varchar(50),
+nivel varchar(100),
+estado varchar(100),
+cedula varchar(12),
+foreign key(cedula) references tblUsuarios(cedula)
+);
+
+create table tblAnexosPermanentes(
+usuario int primary key,
+cedula varchar(100),
+rut varchar(100),
+tarjetaProfesional varchar(100),
+certificadoCuenta varchar(100),
+examenMedico varchar(100),
+estado varchar(100)
+);
+
+create table tblAnexos(
+usuario int primary key,
+ofertaServicios varchar(100),
+hvPublica varchar(100),
+libretaMilitar varchar(100),
+certificadoProcuraduria varchar(100),
+certificadoContraloria varchar(100),
+certificadoPolicia varchar(100),
+certificadoCodigoPolicia varchar(100),
+declaracionBienes varchar(100),
+certificadosLaborales varchar(100),
+certificadoTarjeta varchar(100),
+certificadoRetencion varchar(100),
+certificadoSalud varchar(100),
+certificadoPension varchar(100),
+estadoa varchar (100)
+);
+
+create table tblListaAnexosPermanentes(
+orden int primary key auto_increment,
+nombre varchar(100),
+texto varchar(100),
+titulo varchar(100)
+);
+
+create table tblListaAnexos(
+orden int primary key auto_increment,
+nombre varchar(100),
+texto varchar(100),
+titulo varchar(100)
+);
+
+create table tblObservaciones(
+id int primary key auto_increment,
+nombre varchar(100),
+usuario varchar(100),
+texto text,
+observacion text
+);
+
+create table tblIBC(
+usuario varchar(100) primary key,
+smlv float,
+ibc float,
+salud float,
+pension float,
+arl float,
+riesgo int,
+total varchar(100)
+);
+
+create table tblProyeccion(
+consecutivo int primary key not null auto_increment,
+prefijo varchar(100),
+numContrato varchar(100),
+usuario varchar(100),
+periodo varchar(100),
+honorarios int,
+inicio date,
+final date,
+plazo int,
+valorDia int,
+valorContrato varchar(100)
+);
+
+ALTER TABLE tblProyeccion AUTO_INCREMENT = 1000;
+
+create table tblSeguridad(
+usuario varchar(100) primary key,
+nomEps varchar(100),
+nomPension varchar(100),
+tieneArl varchar(2),
+arl varchar(100),
+fechaArl date
+);
+
+create table tblcontratofinal(
+contrato varchar(100) primary key,
+usuario varchar(100),
+honorarios varchar(100),
+honorariosLetras varchar(100),
+tipoContrato varchar(100),
+valorContrato varchar(100),
+contratoLetras varchar(100),
+numCDP varchar(100),
+valorCDP varchar(100),
+fechaCDP date,
+desplazamiento varchar(3),
+CDPDesplazamiento varchar(100),
+valorCDPDesplazamiento varchar(100),
+fechaCDPDesplazamiento date,
+numRP varchar(100),
+valorRP varchar(100),
+fechaRP date,
+identificacionNecesidad text,
+nombreD varchar(100),
+nomOrdenador varchar(100)
+);
+
+create table tblRol(
+id varchar(12) primary key not null,
+nombre varchar(100),
+rolD varchar(100)
+);
+
+create table tblanexoscontratos(
+usuario int primary key,
+docGenerales varchar (100),
+anexo varchar (100),
+contrato varchar(100),
+contratoFirmado varchar(100),
+cdp varchar(100),
+rp varchar(100),
+cdpDesplazamiento varchar(100),
+estudioPrevio varchar(100),
+evaluacionAceptacion varchar(100),
+analisisSector varchar(100),
+actaInicio varchar(100)
+);
+
+create table tbllistaanexoscontratos(
+orden int primary key auto_increment,
+nombre varchar(100),
+texto varchar(100),
+titulo varchar(100)
+);
+
+INSERT INTO `tbllistaanexoscontratos`(`orden`, `nombre`, `texto`, `titulo`) 
+VALUES 
+('1','docGenerales','docGenerales_','Documentos Generales'),
+('2','anexo','anexo_','Anexos (Hoja de vida, la declaración de bienes, títulos...)'),
+('3','cdp','cdp_','CDP'),
+('4','rp','rp_','RP'),
+('5','cdpDesplazamiento','cdpDesplazamiento_','CDP Desplazamiento (Solo si aplica)'),
+('6','estudioPrevio','estudioPrevio_','Estudio Previo'),
+('7','evaluacionAceptacion','evaluacionAceptacion_','Evaluacion y Aceptacion'),
+('8','analisisSector','analisisSector_','Análisis del Sector'),
+('9','actaInicio','actaInicio_','Acta de Inicio'),
+('10','contrato','contrato_','Contrato listo para firmar'),
+('11','contratoFirmado','contratoFirmado_','Subir Contrato Firmado');
+
+INSERT INTO `tbllistaanexos`(`orden`, `nombre`, `texto`, `titulo`) 
+VALUES 
+('1','ofertaServicios','ofertaServicios_','Oferta de servicios sin fecha'),
+('2','hvPublica','hvPublica_','Hoja de Vida de la Función Pública'),
+('3','libretaMilitar','libretaMilitar_','Libreta militar (Para hombres menores de 50 años de edad)'),
+('4','certificadoProcuraduria','certificadoProcuraduria_','Certificado de procuraduría (Antecedentes Disciplinarios)'),
+('5','certificadoContraloria','certificadoContraloria_','Certificado de la Contraloría (Antecedentes Fiscales)'),
+('6','certificadoPolicia','certificadoPolicia_','Certificado de Policía (Antecedentes Judiciales)'),
+('7','certificadoCodigoPolicia','certificadoCodigoPolicia_','Certificado de Antecedentes en Nuevo Código de Policía (Antecedentes de Medidas Correctivas)'),
+('8','declaracionBienes','declaracionBienes_','Formulario Único Declaración Juramentada de Bienes'),
+('9','certificadosLaborales','certificadosLaborales_','Certificados Laborales'),
+('10','certificadoTarjeta','certificadoTarjeta_','Certificado de Vigencia y Antecedentes de la Tarjeta Profesional'),
+('11','certificadoRetencion','certificadoRetencion_','Certificado de Retención Tributaria'),
+('12','certificadoSalud','certificadoSalud_','Certificado de Afiliación a la Salud como Cotizante Independiente'),
+('13','certificadoPension','certificadoPension_','Certificado de Afiliación a Pensión como Cotizante Independiente');
+
+
+INSERT INTO `tbllistaanexospermanentes`(`orden`, `nombre`, `texto`, `titulo`) 
+VALUES 
+('1','cedula','cedula_','Fotocopia de la Cédula al 150%'),
+('2','rut','rut_','Registro Unico Tributario RUT (Actualizado con vigencia de 2019) código 49 (No responsable de IVA si'),
+('3','tarjetaProfesional','tarjetaProfesional_','Tarjeta Profesional (Tarjeta, Matricula o Registro)'),
+('4','certificadoCuenta','certificadoCuenta_','Certificado de Cuenta en Davivienda'),
+('5','examenMedico','examenMedico_','Examen Pre Ocupacional (Vigencia máxima de 3 años)');

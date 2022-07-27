@@ -1,0 +1,54 @@
+.form-file2 {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 20px;
+	margin-bottom: 20px;
+}
+.form-file__action2 {
+	width: 100%;
+}
+.form-file__action2 label {
+	display: block;
+}
+.form-file__action2 label.title {
+	width: 100%;
+	margin-bottom: 15px;
+	text-align: center;
+}
+.form-file__action2 input {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	display: none;
+}
+.form-file__result2 {
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 90px;
+	z-index: 10;
+}
+.form-file__result2::after {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form-file__result2 img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 50;
+}
+.form-file__result2--active {
+	background-color: rgba(82, 81, 79, 0.314);
+}

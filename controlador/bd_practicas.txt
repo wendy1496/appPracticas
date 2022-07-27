@@ -1,0 +1,170 @@
+create database bd_practicas;
+use bd_practicas;
+
+create table tblUsuarios(
+cedula varchar(12) primary key, 
+nombre varchar(50),
+rol varchar(50),
+facultad varchar(50),
+usuario varchar(50),
+contrasena varchar(50)
+);
+
+
+create table tblestudiante(
+	cedulaEstudiante varchar(50) primary key, 
+	nombre varchar(200) primary key,
+	fechaNacimiento date, 
+	telefono varchar(50),
+	correo varchar(50),
+	dirección varchar(50),
+	facultad varchar(50),
+	nivelPractica varchar(50),
+	nomPrograma varchar(50),
+	electiva varchar(50),
+	promedio varchar(50),
+	perfilProf text,
+	perfilPract text,
+	foto varchar(10),
+	contratoAprendizaje varchar(2),
+	entidad varchar(100),
+	requerimientos varchar(2),
+	cual varchar(200),
+	ciudad varchar(10),
+	fecha date
+);
+
+create table tbltitulos(
+	titulos_id int auto_increment primary key, 
+	titulo varchar(50),
+	institucion varchar(50),
+	fechaGrado date,
+	cedulaEstudiante varchar(12),
+	foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
+);
+
+create table tblcomplementaria(
+complementaria_id int auto_increment primary key, 
+nombreC varchar(50),
+institucionC varchar(50),
+intensidad varchar(50),
+fechaC date,
+cedulaEstudiante varchar(12),
+foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
+);
+
+create table tblidiomas(
+idioma_id int auto_increment primary key, 
+idioma varchar(12),
+nivel int,
+cedulaEstudiante varchar(12),
+foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
+);
+
+create table tblexpLaboral(
+expLab_id int auto_increment primary key, 
+institucionLab varchar(50),
+cargoLab varchar(100),
+tiempoLab int,
+telLab varchar(10),
+cedulaEstudiante varchar(12),
+foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
+);
+
+create table tblrefPersonales(
+refPersonales_id int auto_increment primary key, 
+refPersonal varchar(200),
+cargoRef varchar(100),
+telRef varchar(10),
+celRef varchar(10),
+cedulaEstudiante varchar(12),
+foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
+);
+
+create table tblcentroPracticas(
+nit varchar(20) primary key, 
+nombre varchar(200),
+convenio varchar(20),
+fecha date,
+contacto varchar(200),
+paginaWeb varchar(100),
+correo varchar(200),
+telefono varchar(50),
+direccion varchar(200),
+ciudad varchar(200),
+actividad varchar(100),
+facultad varchar(50),
+capacidad int,
+cupos int
+);
+
+
+create table tblanexos(
+nitEmpresa varchar(10) primary key,
+cedulaRepresentante varchar (100),
+rutPracticas varchar (100),
+certificadoExist varchar(100),
+certificadoAntecR varchar(100),
+certificadoAntecC varchar(100),
+certificadoFiscalesR varchar(100),
+certificadoFiscalesC varchar(100),
+certificadoJudiciales varchar(100),
+medidasCorrectivas varchar(100),
+inhabilidades varchar(100),
+situacionMilitar varchar(100),
+declaracion varchar(100)
+);
+
+create table tblListaAnexos(
+orden int primary key auto_increment,
+nombre varchar(100),
+texto varchar(100),
+titulo varchar(100)
+);
+
+INSERT INTO `tbllistaanexos`(`orden`, `nombre`, `texto`, `titulo`) 
+VALUES 
+('1','cedulaRepresentante','cedulaRepresentante_','Cédula del representante legal del centro de prácticas'),
+('2','rutPracticas','rut_','Rut del centro de prácticas (rut)'),
+('3','certificadoExist','certificadoExist_','Certificado de existencia y representación del centro de práctica, o documento que haga sus veces y acta de nombramiento del rector (cuando aplique)'),
+('4','certificadoAntecR','antecDisciplinarios_','Certificado de antecedentes disciplinarios del representante legal del centro de prácticas no mayor a 3 meses'),
+('5','certificadoAntecC','antecDisciplinariosC_','Certificado de antecedentes disciplinarios del centro de prácticas (se consulta con el RUT) no mayor a 3 meses'),
+('6','certificadoFiscalesR','antecFiscales_','Certificado de antecedentes fiscales del representante legal del centro de prácticas no mayor a 3 meses'),
+('7','certificadoFiscalesC','antecFiscalesC_','Certificado de antecedentes fiscales del centro de prácticas (se consulta con el RUT) no mayor a 3 meses'),
+('8','certificadoJudiciales','antecJudiciales_','Certificado de antecedentes judiciales del representante legal del centro de prácticas no mayor a 3 meses'),
+('9','medidasCorrectivas','medidasCorrectivas_','Certificado de medidas correctivas del representante legal del centro de prácticas no mayor a 3 meses'),
+('10','inhabilidades','inhabilidades_','Certificado de inhabilidades por delitos sexuales del representante legal del centro de prácticas'),
+('11','situacionMilitar','situacionMilitar_','Constancia de situación militar definida ( copia de la libreta o certificación de la página https://www.libretamilitar.mil.co/Modules/Consult/MilitaryCardCertificate o constancia expedida por la autoridad militar)'),
+('12','declaracion','declaracion_','Declaración de la persona jurídica en la cual esta certifique que ni la persona jurídica, ni su representante legal, ni los socios están incursos en inhabilidades, incompatibilidades o prohibiciones. Si es persona natural se debe expedir cerificación en el mismo sentido.');
+
+create table tblanexoEstudiante(
+estudiante varchar(10) primary key,
+foto varchar (100),
+firma varchar (100),
+consentimiento varchar(100),
+compromiso varchar(100)
+);
+
+create table tblListaEstudiante(
+orden int primary key auto_increment,
+nombre varchar(100),
+texto varchar(100),
+titulo varchar(100)
+);
+
+INSERT INTO `tbllistaEstudiante`(`orden`, `nombre`, `texto`, `titulo`) 
+VALUES 
+('1','foto','foto_','Foto'),
+('2','firma','firma_','Firma'),
+('3','consentimiento','consentimiento_','Consentimiento'),
+('4','compromiso','compromiso_','Carta de compromiso');
+
+
+create table tblObservaciones(
+id int primary key auto_increment,
+nombre varchar(100),
+nit varchar(100),
+texto text,
+observacion text
+);
+
