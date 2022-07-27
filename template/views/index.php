@@ -113,7 +113,7 @@
                   facultad.innerHTML = stringTabla;
                  }else{
                   let stringTabla = `
-                  <option selected>No aplica</option>
+                  <option value="No aplica">No aplica</option>
                   `;
                   facultad.innerHTML = stringTabla;
                  }

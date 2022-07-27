@@ -39,9 +39,13 @@ include_once '../../controlador/conexion.php';
               <label for="formGroupExampleInput" class="form-label required text-dark">Nombre de la empresa o razón social</label>
               <input class="form-control text-secondary" type="" name="nombreEmpresa" placeholder="Nombre Centro de prácticas" value="" required>
             </div>
-            <div class="col-xl-6 col-sm-6">
+            <div class="col-xl-4 col-sm-6">
               <label for="formGroupExampleInput" class="form-label required text-dark">NIT</label>
               <input class="form-control text-secondary" type="" name="nit" placeholder="NIT Centro de prácticas" value="" required>
+            </div>
+            <div class="col-xl-2 col-sm-6">
+              <label for="formGroupExampleInput" class="form-label required text-dark">Código de verificación</label>
+              <input class="form-control text-secondary" type="number" name="digito" value="" required>
             </div>
           </div>
           <div class="row pt-2 pb-2">
@@ -74,8 +78,12 @@ include_once '../../controlador/conexion.php';
                     <label class="form-check-label" for="flexRadioDefault1">Masculino</label>
             </div>
             <div class="col-xl-6 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Representante legal o suplente</label>
-              <input class="form-control text-secondary" type="" name="representante" placeholder="Indicar si es representante legal o suplente" value="" required>
+            <label for="formGroupExampleInput" class="form-label required text-dark">Tipo de representante</label>
+                <select class="form-select" name="representante"  aria-label="Default select example">
+                <option selected> Seleccione...</option>
+                  <option value="Representante legal">Representante legal</option>
+                  <option value="Suplente">Suplente</option>
+                </select>
             </div>
           </div>
           <div class="row pt-2 pb-2">
@@ -88,41 +96,84 @@ include_once '../../controlador/conexion.php';
               <input class="form-control text-secondary" type="" name="paginaWeb" placeholder="Página Web" value="" required>
             </div>
           </div>
-          <div class="row pt-2 pb-2">
-            <div class="col-xl-6 col-sm-6">
-            <label for="formGroupExampleInput" class="form-label required text-dark">Descripción de la práctica</label>
-            <input class="form-control text-secondary" type="" name="actividad" placeholder="Descripción Actividad Centro de prácticas" value="" required>
-
-            </div>
-            <div class="col-xl-6 col-sm-6">
-                <label for="formGroupExampleInput" class="form-label required text-dark">Facultad asociada</label>
-                <select class="form-select" name="facultad"  aria-label="Default select example">
-                <option selected> Seleccione...</option>
-                  <option value="Administrativa">Ciencias administrativas y económicas</option>
-                  <option value="Ingeniería">Ingeniería</option>
-                  <option value="Derecho">Derecho y ciencias forenses</option>
-                  <option value="Licenciatura">Licenciatura</option>
-                  <option value="Trabajo Social">Trabajo Social</option>
-                  <option value="Psicología">Psicología</option>
-                </select>
-              </div>
-          </div>
-          <div class="row pt-2 pb-2">
-            <div class="col-xl-6 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Capacidad de cupos</label>
-              <input class="form-control text-secondary" type="number" name="capacidad" placeholder="Capacidad de cupos" value="" required>
-            </div>
-            <div class="col-xl-6 col-sm-6">
-              <label for="formGroupExampleInput" class="form-label required text-dark">Cupos asignados</label>
-              <input class="form-control text-secondary" type="number" name="cuposAsignados" placeholder="Cupos Asignados" value="" required>
-            </div>
-          </div>
           <div class="row pt-2 text-center">
             <div class="col-6">
                 <button class="btn btn-tdea">Crear</button>
             </div>
-          </div> 
-          <table id="example" class="table table-striped table-bordered" style="width:100%">
+          </div>
+          <h5 class="text-center pt-3 pb-3">Asociar centro de prácticas con facultad o programa</h5>
+        <center><p>Los campos marcados con * son obligatorios</p></center>
+        <form id="f1" name="f1">
+              <div class="row pt-2 pb-2">
+                <div class="col-xl-6 col-sm-6">
+                  <label for="formGroupExampleInput" class="form-label required text-dark">Facultad o programa</label>
+                <select class="form-select" aria-label="Default select example" id="rol" name="rol" onchange="cambiarDatos()">
+                  <option value="0">Seleccione...</option>
+                  <option value="Ingeniería">Ingeniería</option>
+                  <option value="Derecho">Derecho</option>
+                  <option value="Administración">Administración</option> 
+                  <option value="Licenciatura en Literatura y Lengua Castellana">Licenciatura en Literatura y Lengua Castellana</option>             
+                  <option value="Licenciatura en Educación Infantil">Licenciatura en Educación Infantil</option>             
+                  <option value="Trabajo Social">Trabajo Social</option>           
+                  <option value="Psicología">Psicología</option> 
+                  <option value="Enfermería">Enfermería</option>                      
+                </select>
+                </div>
+                <div class="col-xl-6 col-sm-6">
+                  
+                <label for="formGroupExampleInput" class="form-label required text-dark">Modalidad</label>
+                <select class="form-select" id=facultad name="facultad" aria-label="Default select example">
+                
+                </select>
+               
+              </div>
+              </div>
+            </form>
+              <script>
+               
+                function cambiarDatos(){
+                 let rol = document.getElementById('rol');
+                 let facultad = document.getElementById('facultad');
+                 console.log(rol.value);
+                 if(rol.value == "Psicología" || rol.value == "Enfermería"){
+                  let stringTabla = `
+                  <option selected> Seleccione...</option>
+                  <option value="Docencia Servicio">Docencia Servicio</option>
+                  `;
+                  facultad.innerHTML = stringTabla;
+                 }else{
+                  let stringTabla = `
+                  <option selected>Seleccione...</option>
+                  <option value="Aprendizaje">Aprendizaje</option>
+                  <option value="Pasantía">Pasantía</option>
+                  <option value="Estudiante/Trabajador">Estudiante/Trabajador</option>
+
+                  `;
+                  facultad.innerHTML = stringTabla;
+                 }
+                }
+
+              </script>
+      </form>  
+      <form action="../../controlador/centroPracticasFacultad.php" method="post"  enctype="multipart/form-data" class="img-form">
+          <div class="row pt-4 pb-4">
+            <div class="col-xl-6 col-sm-6">
+              <label for="formGroupExampleInput" class="form-label required text-dark">Descripción de la práctica</label>
+              <input class="form-control text-secondary" type="number" name="descripcion" placeholder="Descripción" value="" >
+            </div>
+            <div class="col-xl-6 col-sm-6">
+              <label for="formGroupExampleInput" class="form-label required text-dark">Capacidad de cupos</label>
+              <input class="form-control text-secondary" type="number" name="cuposAsignados" placeholder="Capacidad de cupos" value="" >
+            </div>
+          </div>
+          <div class="row pt-2 text-center">
+            <div class="col-6">
+                <button class="btn btn-tdea">Agregar</button>
+            </div>
+          </div>
+      </form>
+           <br>
+          <table id="example" class="table table-striped table-bordered pt-4 pb-4" style="width:100%">
             <thead>
                 <tr>
                   <th>Nombre Centro de prácticas</th>
@@ -163,7 +214,7 @@ include_once '../../controlador/conexion.php';
                 
           </div>
           </div>
-</form>
+
       </div>
     </div>
   </div>

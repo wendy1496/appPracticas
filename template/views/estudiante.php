@@ -70,7 +70,9 @@ $con = $con->conectar();
                     } else if ($variable == 'Enviado' && $nombre == "foto") {
                     ?>
                       <div class="form-file">
-
+                      <div class="form-file__action">
+                          <input type="file" accept=".jpg" name="<?php echo $nombre ?>" id="image" multiple style="display: none;" required>
+                        </div>
                         <div class="form-file__result" id="result-image">
                           <img id="img-result" src="<?php echo '../../controlador/anexos/foto_' . $cedula . '.jpg' ?>" alt="" />
                         </div>

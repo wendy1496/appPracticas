@@ -83,6 +83,7 @@ foreign key(cedulaEstudiante) references tblestudiante(cedulaEstudiante)
 
 create table tblcentroPracticas(
 nit varchar(20) primary key, 
+digito int,
 nombre varchar(200),
 convenio varchar(20),
 fecha date,
@@ -91,11 +92,17 @@ paginaWeb varchar(100),
 correo varchar(200),
 telefono varchar(50),
 direccion varchar(200),
-ciudad varchar(200),
-actividad varchar(100),
-facultad varchar(50),
-capacidad int,
-cupos int
+sexo varchar (10),
+representante varchar(50),
+ciudad varchar(200)
+);
+
+create table tblcentroFacultad(
+relacion_id int auto_increment primary key,  
+nit varchar(20),
+modalidad varchar(20),
+tipoContrato varchar(200),
+foreign key(nit) references tblcentroPracticas(nit)
 );
 
 
